@@ -11,18 +11,12 @@ makeCacheMatrix <- function(x = matrix()) {
     # each time this function is called, an environment will be
     # assigned to the matrix x (the output)
     inverse <- NULL
-    print(environment())
-    env <- environment()
-    parent.env(env)
     set <- function(y) {
         x <<- y
         inverse <<- NULL
     }
     get <- function() x
     setinverse <- function(i) inverse <<- i
-    print(environment())
-    env <- environment()
-    parent.env(env)
     getinverse <- function() inverse
     list(set = set, get = get,
          setinverse = setinverse,
@@ -42,18 +36,13 @@ cacheSolve <- function(x, ...) {
     # makeCacheMatrix function has to be made, we can be sure that 
     # inverse matrix will be calculated by cacheSolve function 
     # each time a new matrix is passed to it.
-    print(environment())
-    env <- environment()
-    parent.env(env)
+ 
     inverse <- x$getinverse()
     if (!is.null(inverse)){
         print("getting cached data")
         return(inverse)}
         data <- x$get()
         inverse<- solve(data)
-    print(environment())
-    env <- environment()
-    parent.env(env)
         x$setinverse(inverse)
         inverse
     
